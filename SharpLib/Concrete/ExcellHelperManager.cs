@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SharpLib.Concrete
 {
-    public class ExcellHelper : CommonFileUpload
+    public class ExcellHelperManager : CommonFileUploadManager
     {
         /// <summary>
         /// Converts posted file to Generic Type Dot Net Class List. Its converts only one file in one post.
@@ -78,9 +78,6 @@ namespace SharpLib.Concrete
         /// <returns></returns>
         private ResponseModel<SavedFileVM> ControlValidationSaveAndGetSavedFile(ToDotNetClassInitVM init)
         {
-            init.UploadInit.MaxFileCount = 1;
-            init.UploadInit.MaxFileCountOverflowMessage = "Yülenebilecek dosya adetinden fazla yükleme yaptınız";
-
             var validCheck = ValidateFiles(init.UploadInit);
 
             if (!validCheck.ProcessStatus)

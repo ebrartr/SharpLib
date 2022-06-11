@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using SharpLib.Extensions.DataValidation;
 
 namespace SharpLib.Concrete
 {
-    public class CommonFileUpload
+    public class CommonFileUploadManager
     { 
       /// <summary>
       /// Cheks if posted files are valid and returns valid and not valid file Lists
@@ -73,9 +74,14 @@ namespace SharpLib.Concrete
             if (postedFile.Length > init.MaxFileSize)
                 return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.FileSizeOverflowMesaage };
 
+            init.AllowedExtensionList = init.AllowedExtensionList.IfNullSetEmpty();
+
+            if (!init.AllowedExtensionList.Any())
+                return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.NoAllowedExtensionFoundMesage };
+
             var fileExtension = Path.GetExtension(postedFile.FileName).ToLower();
 
-            if (init.AllowedExtensionList != null && !init.AllowedExtensionList.Contains(fileExtension))
+            if (!init.AllowedExtensionList.Any(x=>x == fileExtension))
                 return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.InvalidExtensionMessage };
 
             byte[] tempBuffer = new byte[postedFile.Length];
@@ -104,7 +110,15 @@ namespace SharpLib.Concrete
         /// </returns>
         public static FileSaveResultVM SaveFiles(List<ValidFileVM> validFileList, FileUploadVM init)
         {
+
             var result = new FileSaveResultVM { SavedFileList = new List<SavedFileVM>(), NotSavedFileList = new List<NotSavedFileVM>() };
+
+            if (string.IsNullOrWhiteSpace(init.DestinationPath))
+            {
+                var tempList = validFileList.Select(x => new NotSavedFileVM { FileOriginalName = x.FileName, Message = init.DestinationNotSetMessage });
+
+                return result;
+            }
 
             foreach (var validFile in validFileList)
             {

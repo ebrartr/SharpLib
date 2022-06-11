@@ -9,10 +9,22 @@ namespace SharpLib.Model.Excell
     {
         public FileUploadVM UploadInit { get; set; }
 
+
+        private string _FileDidNotSaveMessage { get; set; }
         /// <summary>
         /// The custom message when Posted file was not save sucessfully
         /// </summary>
-        public string FileDidNotSaveMessage { get; set; }
+        public string FileDidNotSaveMessage
+        {
+            get
+            {
+                return string.IsNullOrEmpty(_FileDidNotSaveMessage) ? "File could not be saved!" : _FileDidNotSaveMessage;
+            }
+            set
+            {
+                _FileDidNotSaveMessage = value;
+            }
+        }
 
         /// <summary>
         /// if true, the saved filse will be delete after save
@@ -26,12 +38,14 @@ namespace SharpLib.Model.Excell
 
 
         private string _CanNotConvertMessage { get; set; }
-        public string CanNotConvertMessage {
-            get {
+        public string CanNotConvertMessage
+        {
+            get
+            {
 
                 return string.IsNullOrEmpty(_CanNotConvertMessage) ? "File did not select!" : _CanNotConvertMessage;
             }
-        
+
             set
             {
                 _CanNotConvertMessage = value;

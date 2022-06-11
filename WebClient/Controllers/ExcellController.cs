@@ -12,11 +12,11 @@ namespace WebClient.Controllers
 {
     public class ExcellController : Controller
     {
-        private static ExcellHelper _excellHelper;
+        private static ExcellHelperManager _excellHelper;
 
         public ExcellController()
         {
-            _excellHelper = new ExcellHelper();
+            _excellHelper = new ExcellHelperManager();
         }
 
         public IActionResult Index()
@@ -28,18 +28,12 @@ namespace WebClient.Controllers
         {
             var init = new ToDotNetClassInitVM
             {
-                FileDidNotSaveMessage = "File could not be saved!",
                 UploadInit = new FileUploadVM
                 {
                     AllowedExtensionList = new List<string> { ".xls", ".xlsx" },
-                    MaxFileSize = 1024 * 1024 * 1024,// 1 GB
-                    FileSizeOverflowMesaage = "The file size is larger than the specified size!",
-                    ErrorMessage = "An unexpected error has occurred!",
-                    InvalidExtensionMessage = "Invalid file extension!",
-                    NoFileSelectedMessage = "No file found!",
                     FileNamePrefix = string.Format("{0:yyyy.MM.dd_HH.mm.ss}", DateTime.Now),
                     DestinationPath = @"D:\TempUpload",
-                    UploadedFiles = Request.Form.Files
+                    UploadedFiles = Request.Form.Files,
                 }
             };
 
