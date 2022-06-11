@@ -12,15 +12,6 @@ namespace SharpLib.Concrete
 {
     public class CommonFileUploadManager
     { 
-      /// <summary>
-      /// Cheks if posted files are valid and returns valid and not valid file Lists
-      /// </summary>
-      /// <param name="init"></param>
-      /// <returns>There is a few scenario : 
-      /// <para>1-) ProcessStatus will return false only these case : when posted file count is not valid</para>
-      /// <para>2-) ProcessStatus will true only this case : when posted file count is valid</para>
-      /// <para></para>
-      /// <para>But when ProcessStatus is true and you want to check if all files are valid you must control the All Files Are Valid property in the Response (usage : Response.AllFilesAreValid) in the method result</para></returns>
         public static ResponseModel<FileValidateResultVM> ValidateFiles(FileUploadVM init)
         {
             if (init.UploadedFiles == null || init.UploadedFiles.Count() == 0)
@@ -50,12 +41,10 @@ namespace SharpLib.Concrete
                 }
             }
 
-            if (tempResult.ValidFileList.Count() == init.UploadedFiles.Count() && !tempResult.NotValidFileList.Any())// All files are valid and there is no invalid file
-                tempResult.AllFilesAreValid = true;
+            if (!(tempResult.ValidFileList.Count() == init.UploadedFiles.Count() && !tempResult.NotValidFileList.Any()))
+                return new ResponseModel<FileValidateResultVM> { ProcessStatus = false, Message = $"{init.SomeFilesNotValidMessage} {string.Join(", ", tempResult.NotValidFileList.Select(x => $"(File Name:{ x.OriginalFileName }, Message : { x.ValidationMessage})"))}",Result=tempResult };
 
-            var result = new ResponseModel<FileValidateResultVM> { ProcessStatus = true, Result = tempResult };
-
-            return result;
+            return new ResponseModel<FileValidateResultVM> { ProcessStatus = true,Result=tempResult }; ;
         }
 
         /// <summary>
@@ -68,21 +57,26 @@ namespace SharpLib.Concrete
         /// </returns>
         private static ResponseModel<ValidFileVM> ValidateFile(IFormFile postedFile, FileUploadVM init)
         {
-            if (postedFile == null || postedFile.Length == 0)
+            if (postedFile == null)
                 return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.NoFileSelectedMessage };
+
+            if (postedFile.Length == 0)
+                return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.EmtyContentMessage };
 
             if (postedFile.Length > init.MaxFileSize)
                 return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.FileSizeOverflowMesaage };
 
             init.AllowedExtensionList = init.AllowedExtensionList.IfNullSetEmpty();
 
-            if (!init.AllowedExtensionList.Any())
-                return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.NoAllowedExtensionFoundMesage };
+            if (init.AllowedExtensionList.Any())
+            {
+                // if allowed extension set
 
-            var fileExtension = Path.GetExtension(postedFile.FileName).ToLower();
+                var fileExtension = Path.GetExtension(postedFile.FileName).ToLower();
 
-            if (!init.AllowedExtensionList.Any(x=>x == fileExtension))
-                return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.InvalidExtensionMessage };
+                if (!init.AllowedExtensionList.Any(x => x == fileExtension))
+                    return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.InvalidExtensionMessage };
+            }
 
             byte[] tempBuffer = new byte[postedFile.Length];
             postedFile.OpenReadStream().Read(tempBuffer, 0, tempBuffer.Length);

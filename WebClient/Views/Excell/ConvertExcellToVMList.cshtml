@@ -1,8 +1,10 @@
 ﻿@using SharpLib.Model.Common
 @using SharpLib.Model.Excell
+
+@using SharpLib.Model.Upload
 @using SharpLib.Model.Template
 
-@model ResponseModel<ToDotNetClassResultVM<TestModel1VM>>
+@model ResponseModel<List<SavedFileVM>>
 
 @if (Model.ProcessStatus)
 {

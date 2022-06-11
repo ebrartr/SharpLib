@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SharpLib.Concrete;
+using SharpLib.Extensions.File;
 using SharpLib.Model.Excell;
 using SharpLib.Model.Template;
 using SharpLib.Model.Upload;
@@ -26,18 +27,14 @@ namespace WebClient.Controllers
 
         public IActionResult ConvertExcellToVMList()
         {
-            var init = new ToDotNetClassInitVM
+            var options = new FileUploadVM
             {
-                UploadInit = new FileUploadVM
-                {
-                    AllowedExtensionList = new List<string> { ".xls", ".xlsx" },
-                    FileNamePrefix = string.Format("{0:yyyy.MM.dd_HH.mm.ss}", DateTime.Now),
-                    DestinationPath = @"D:\TempUpload",
-                    UploadedFiles = Request.Form.Files,
-                }
+                FileNamePrefix = string.Format("{0:yyyy.MM.dd_HH.mm.ss}", DateTime.Now),
+                DestinationPath = @"D:\TempUpload",
+                MaxFileCount=3
             };
 
-            var result = _excellHelper.ToDotNetClass<TestModel1VM>(init);
+            var result = Request.Form.Files.Save(options);
 
             return View(result);
         }

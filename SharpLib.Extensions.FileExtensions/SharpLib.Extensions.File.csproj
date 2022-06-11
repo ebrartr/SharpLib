@@ -1,11 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SharpLib.Extensions.FileExtensions\SharpLib.Extensions.File.csproj" />
     <ProjectReference Include="..\SharpLib\SharpLib.csproj" />
   </ItemGroup>
 

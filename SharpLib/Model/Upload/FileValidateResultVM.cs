@@ -10,6 +10,5 @@ namespace SharpLib.Model.Upload
 
         public List<NotValidFileVM> NotValidFileList { get; set; }
 
-        public bool AllFilesAreValid { get; set; }
     }
 }

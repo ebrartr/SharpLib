@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "WebClient\WebC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLib.Extensions.DataValidation", "SharpLib.Extensions.DataValidation\SharpLib.Extensions.DataValidation.csproj", "{1919AF69-E94F-44BD-9FB2-D7BFD0B35C75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLib.Extensions.File", "SharpLib.Extensions.FileExtensions\SharpLib.Extensions.File.csproj", "{8300FC9E-9109-4F65-9458-888C33A2BB21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1919AF69-E94F-44BD-9FB2-D7BFD0B35C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1919AF69-E94F-44BD-9FB2-D7BFD0B35C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1919AF69-E94F-44BD-9FB2-D7BFD0B35C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8300FC9E-9109-4F65-9458-888C33A2BB21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8300FC9E-9109-4F65-9458-888C33A2BB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8300FC9E-9109-4F65-9458-888C33A2BB21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8300FC9E-9109-4F65-9458-888C33A2BB21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

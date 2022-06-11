@@ -38,7 +38,7 @@ namespace SharpLib.Model.Upload
         }
 
         /// <summary>
-        /// .xls, .xlsx, .pdf
+        /// .xls, .xlsx, .pdf, if not set allow all types
         /// </summary>
         public List<string> AllowedExtensionList { get; set; }
 
@@ -110,23 +110,43 @@ namespace SharpLib.Model.Upload
             set { _MaxFileCountOverflowMessage = value; }
         }
 
-        private string _NoAllowedExtensionFoundMesage { get; set; }
-
-        public string NoAllowedExtensionFoundMesage
-        {
-            get
-            {
-                return string.IsNullOrWhiteSpace
-                   (_NoAllowedExtensionFoundMesage) ? "No allowed extensions found in init" : _NoAllowedExtensionFoundMesage;
-            }
-            set { _NoAllowedExtensionFoundMesage = value; }
-        }
 
         private string _DestinationNotSetMessage { get; set; }
         public string DestinationNotSetMessage
         {
-            get{ return string.IsNullOrWhiteSpace(_DestinationNotSetMessage) ? "No Destination path is set." : _DestinationNotSetMessage;}
+            get { return string.IsNullOrWhiteSpace(_DestinationNotSetMessage) ? "No Destination path is set." : _DestinationNotSetMessage; }
             set { DestinationNotSetMessage = value; }
+        }
+
+        private string _FileDidNotSaveMessage { get; set; }
+        /// <summary>
+        /// The custom message when Posted file was not save sucessfully
+        /// </summary>
+        public string FileDidNotSaveMessage
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(_FileDidNotSaveMessage) ? "Files could not be saved!" : _FileDidNotSaveMessage;
+            }
+            set
+            {
+                _FileDidNotSaveMessage = value;
+            }
+        }
+
+        private string _EmtyContentMessage { get; set; }
+        public string EmtyContentMessage
+        {
+            get { return string.IsNullOrWhiteSpace(_EmtyContentMessage) ? "File content is emty!" : _EmtyContentMessage; }
+            set { _EmtyContentMessage = value; }
+        }
+
+        private string _SomeFilesNotValidMessage { get; set; }
+
+        public string SomeFilesNotValidMessage
+        {
+            get { return string.IsNullOrWhiteSpace(_SomeFilesNotValidMessage) ? "Some files are not valid!" : _SomeFilesNotValidMessage; }
+            set { _SomeFilesNotValidMessage = value; }
         }
     }
 }
