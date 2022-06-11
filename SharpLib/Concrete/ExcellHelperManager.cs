@@ -11,7 +11,7 @@ namespace SharpLib.Concrete
     public class ExcellHelperManager : CommonFileUploadManager
     {
        
-        private ResponseModel<ToDotNetClassResultVM<T>> ReturnIfNotConvert<T>(ToDotNetClassInitVM init, SavedFileVM tempFile, ResponseModel<List<T>> convertResult)
+        private ResponseModel<ToDotNetClassResultVM<T>> ReturnIfNotConvert<T>(ToDotNetClassInitVM init, ServerFileVM tempFile, ResponseModel<List<T>> convertResult)
         {
             var tempMessage = $"{init.CanNotConvertMessage}.{Environment.NewLine}{Environment.NewLine}({convertResult.Message})";
 
@@ -27,7 +27,7 @@ namespace SharpLib.Concrete
             };
         }
 
-        private ResponseModel<List<T>> ConvertExcellToGenericTypeList<T>(SavedFileVM excellFile, ToDotNetClassInitVM init)
+        private ResponseModel<List<T>> ConvertExcellToGenericTypeList<T>(ServerFileVM excellFile, ToDotNetClassInitVM init)
         {
             try
             {

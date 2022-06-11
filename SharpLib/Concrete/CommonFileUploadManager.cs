@@ -105,7 +105,7 @@ namespace SharpLib.Concrete
         public static FileSaveResultVM SaveFiles(List<ValidFileVM> validFileList, FileUploadVM init)
         {
 
-            var result = new FileSaveResultVM { SavedFileList = new List<SavedFileVM>(), NotSavedFileList = new List<NotSavedFileVM>() };
+            var result = new FileSaveResultVM { SavedFileList = new List<ServerFileVM>(), NotSavedFileList = new List<NotSavedFileVM>() };
 
             if (string.IsNullOrWhiteSpace(init.DestinationPath))
             {
@@ -140,25 +140,25 @@ namespace SharpLib.Concrete
         /// <param name="validFile"></param>
         /// <param name="destinationPath"></param>
         /// <returns></returns>
-        private static ResponseModel<SavedFileVM> SaveFile(ValidFileVM validFile, string destinationPath)
+        private static ResponseModel<ServerFileVM> SaveFile(ValidFileVM validFile, string destinationPath)
         {
             try
             {
                 if (validFile.FileBytes == null)
-                    return new ResponseModel<SavedFileVM> { ProcessStatus = false, Message = "No Bytes found" };
+                    return new ResponseModel<ServerFileVM> { ProcessStatus = false, Message = "No Bytes found" };
 
                 var fullPath = $"{destinationPath}\\{validFile.FileName}";
 
                 Directory.CreateDirectory(destinationPath);
                 File.WriteAllBytes(fullPath, validFile.FileBytes);
 
-                var savedFile = new SavedFileVM { DirectoryPath = fullPath, FileName = validFile.FileName, FileSize = validFile.FileSize };
+                var savedFile = new ServerFileVM { DirectoryPath = fullPath, FileName = validFile.FileName, FileSize = validFile.FileSize };
 
-                return new ResponseModel<SavedFileVM> { ProcessStatus = true, Result = savedFile, Message = "File is sucessfully saved" };
+                return new ResponseModel<ServerFileVM> { ProcessStatus = true, Result = savedFile, Message = "File is sucessfully saved" };
             }
             catch (Exception e)
             {
-                return new ResponseModel<SavedFileVM> { ProcessStatus = false, Message = $"Message : {e.Message}" };
+                return new ResponseModel<ServerFileVM> { ProcessStatus = false, Message = $"Message : {e.Message}" };
             }
         }
 

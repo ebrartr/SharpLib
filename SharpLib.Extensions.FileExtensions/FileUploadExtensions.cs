@@ -17,7 +17,7 @@ namespace SharpLib.Extensions.File
         /// <param name="fomrCollection"></param>
         /// <param name="fileUploadInit"></param>
         /// <returns></returns>
-        public static ResponseModel<List<SavedFileVM>> Save(this IFormFileCollection formCollection, FileUploadVM options = null)
+        public static ResponseModel<List<ServerFileVM>> Save(this IFormFileCollection formCollection, FileUploadVM options = null)
         {
             if (options == null)
                 options = new FileUploadVM();
@@ -27,14 +27,14 @@ namespace SharpLib.Extensions.File
             var validCheck = CommonFileUploadManager.ValidateFiles(options);
 
             if (!validCheck.ProcessStatus)
-                return new ResponseModel<List<SavedFileVM>> { ProcessStatus = false, Message = validCheck.Message };
+                return new ResponseModel<List<ServerFileVM>> { ProcessStatus = false, Message = validCheck.Message };
 
             var savedResult = CommonFileUploadManager.SaveFiles(validCheck.Result.ValidFileList, options);
 
             if (savedResult.SavedFileList.Any())
-                return new ResponseModel<List<SavedFileVM>> { ProcessStatus = true, Result = savedResult.SavedFileList };
+                return new ResponseModel<List<ServerFileVM>> { ProcessStatus = true, Result = savedResult.SavedFileList };
 
-            return new ResponseModel<List<SavedFileVM>> { ProcessStatus = false, Message = options.FileDidNotSaveMessage };
+            return new ResponseModel<List<ServerFileVM>> { ProcessStatus = false, Message = options.FileDidNotSaveMessage };
         }
     }
 }

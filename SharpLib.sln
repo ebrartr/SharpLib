@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLib.Extensions.DataVal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLib.Extensions.File", "SharpLib.Extensions.FileExtensions\SharpLib.Extensions.File.csproj", "{8300FC9E-9109-4F65-9458-888C33A2BB21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLib.Extensions.Converter", "SharpLib.Extensions.Converter\SharpLib.Extensions.Converter.csproj", "{E10CBD53-25DE-4311-8E93-E204D1ECF2D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8300FC9E-9109-4F65-9458-888C33A2BB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8300FC9E-9109-4F65-9458-888C33A2BB21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8300FC9E-9109-4F65-9458-888C33A2BB21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E10CBD53-25DE-4311-8E93-E204D1ECF2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E10CBD53-25DE-4311-8E93-E204D1ECF2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E10CBD53-25DE-4311-8E93-E204D1ECF2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E10CBD53-25DE-4311-8E93-E204D1ECF2D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

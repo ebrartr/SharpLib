@@ -4,7 +4,10 @@ using System.Text;
 
 namespace SharpLib.Model.Upload
 {
-    public class SavedFileVM : ValidFileVM
+    /// <summary>
+    /// The file which is store in application server folders. It can be a pre uploaded file or etc.
+    /// </summary>
+    public class ServerFileVM : ValidFileVM
     {
         /// <summary>
         /// File directory with new path include file name

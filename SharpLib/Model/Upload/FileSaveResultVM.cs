@@ -6,7 +6,7 @@ namespace SharpLib.Model.Upload
 {
     public class FileSaveResultVM
     {
-        public List<SavedFileVM> SavedFileList { get; set; }
+        public List<ServerFileVM> SavedFileList { get; set; }
 
         public List<NotSavedFileVM> NotSavedFileList { get; set; }
     }

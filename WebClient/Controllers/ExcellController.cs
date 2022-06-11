@@ -31,7 +31,7 @@ namespace WebClient.Controllers
             {
                 FileNamePrefix = string.Format("{0:yyyy.MM.dd_HH.mm.ss}", DateTime.Now),
                 DestinationPath = @"D:\TempUpload",
-                MaxFileCount=3
+                MaxFileCount=1
             };
 
             var result = Request.Form.Files.Save(options);
