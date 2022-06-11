@@ -1,0 +1,14 @@
+﻿@using SharpLib.Model.Common
+@using SharpLib.Model.Excell
+@using SharpLib.Model.Template
+
+@model ResponseModel<ToDotNetClassResultVM<TestModel1VM>>
+
+@if (Model.ProcessStatus)
+{
+    <span style="color:green">İşlem Başarılı</span>
+}
+else
+{
+    <span style="color:red">@Model.Message</span>
+}

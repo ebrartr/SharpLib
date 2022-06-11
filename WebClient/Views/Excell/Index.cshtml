@@ -1,0 +1,22 @@
+﻿@using (Html.BeginForm("ConvertExcellToVMList", "Excell", FormMethod.Post, new { id = "excelForm", @class = "form-horizontal", @enctype = "multipart/form-data" }))
+{
+    <div class="col-xs-12">
+        <label class="col-form-label">Dosya</label>
+        <div>
+            <input type="file" name="excelFile" id="excelFile" class="button" onchange="fileChange()" multiple />
+        </div>
+    </div>
+}
+
+
+<script>
+
+
+
+function fileChange() {
+
+    $('#excelForm').submit();
+
+}
+
+</script>
