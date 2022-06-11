@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SharpLib.Concrete;
+using SharpLib.Extensions.Converter;
 using SharpLib.Extensions.File;
 using SharpLib.Model.Excell;
 using SharpLib.Model.Template;
@@ -35,6 +36,8 @@ namespace WebClient.Controllers
             };
 
             var result = Request.Form.Files.Save(options);
+
+            var convert = result.Result.Single().ToObjectList<TestModel1VM>();
 
             return View(result);
         }

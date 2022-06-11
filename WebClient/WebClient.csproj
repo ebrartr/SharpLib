@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SharpLib.Extensions.Converter\SharpLib.Extensions.Converter.csproj" />
     <ProjectReference Include="..\SharpLib.Extensions.FileExtensions\SharpLib.Extensions.File.csproj" />
     <ProjectReference Include="..\SharpLib\SharpLib.csproj" />
   </ItemGroup>
