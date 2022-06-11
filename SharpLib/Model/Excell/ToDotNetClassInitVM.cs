@@ -18,7 +18,7 @@ namespace SharpLib.Model.Excell
         {
             get
             {
-                return string.IsNullOrEmpty(_FileDidNotSaveMessage) ? "File could not be saved!" : _FileDidNotSaveMessage;
+                return string.IsNullOrWhiteSpace(_FileDidNotSaveMessage) ? "File could not be saved!" : _FileDidNotSaveMessage;
             }
             set
             {
@@ -43,7 +43,7 @@ namespace SharpLib.Model.Excell
             get
             {
 
-                return string.IsNullOrEmpty(_CanNotConvertMessage) ? "File did not select!" : _CanNotConvertMessage;
+                return string.IsNullOrWhiteSpace(_CanNotConvertMessage) ? "File did not select!" : _CanNotConvertMessage;
             }
 
             set
