@@ -36,6 +36,8 @@ namespace SharpLib.Extensions.Converter
                     while (reader.Read()) //Each row of the file
                     {
 
+                        //todo buradan devam et...
+
                         if (firstRow)
                         {
                             for (int cellIndex = 0; cellIndex < reader.FieldCount; cellIndex++)
