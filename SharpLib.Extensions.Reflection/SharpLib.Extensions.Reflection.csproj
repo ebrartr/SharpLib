@@ -5,12 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SharbLib.Attributes\SharbLib.Attributes.csproj" />
-    <ProjectReference Include="..\SharpLib.Extensions.DataValidation\SharpLib.Extensions.DataValidation.csproj" />
   </ItemGroup>
 
 </Project>

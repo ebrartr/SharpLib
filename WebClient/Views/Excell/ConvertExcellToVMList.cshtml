@@ -4,11 +4,35 @@
 @using SharpLib.Model.Upload
 @using SharpLib.Model.Template
 
-@model ResponseModel<List<ServerFileVM>>
+@model ResponseModel<List<TestModel1VM>>
 
 @if (Model.ProcessStatus)
 {
     <span style="color:green">İşlem Başarılı</span>
+    <hr />
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.Result.Single().Id)</th>
+                <th>@Html.DisplayNameFor(x => x.Result.Single().Age)</th>
+                <th>@Html.DisplayNameFor(x => x.Result.Single().Name)</th>
+                <th>@Html.DisplayNameFor(x => x.Result.Single().SurName)</th>
+                <th>@Html.DisplayNameFor(x => x.Result.Single().BirthDate)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Result)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Age</td>
+                    <td>@item.Name</td>
+                    <td>@item.SurName</td>
+                    <td>@item.BirthDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {

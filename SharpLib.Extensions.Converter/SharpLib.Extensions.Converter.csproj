@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SharpLib.Extensions.Reflection\SharpLib.Extensions.Reflection.csproj" />
     <ProjectReference Include="..\SharpLib\SharpLib.csproj" />
   </ItemGroup>
 

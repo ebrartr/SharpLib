@@ -2,6 +2,7 @@
 using SharpLib.Concrete;
 using SharpLib.Extensions.Converter;
 using SharpLib.Extensions.File;
+using SharpLib.Model.Common;
 using SharpLib.Model.Excell;
 using SharpLib.Model.Template;
 using SharpLib.Model.Upload;
@@ -32,14 +33,18 @@ namespace WebClient.Controllers
             {
                 FileNamePrefix = string.Format("{0:yyyy.MM.dd_HH.mm.ss}", DateTime.Now),
                 DestinationPath = @"D:\TempUpload",
-                MaxFileCount=1
+                MaxFileCount=1,
+                AllowedExtensionList = new List<string> { ".xls",".xlsx"}
             };
 
-            var result = Request.Form.Files.Save(options);
+            var saveResult = Request.Form.Files.Save(options);
 
-            var convert = result.Result.Single().ToObjectList<TestModel1VM>();
+            if (!saveResult.ProcessStatus)
+                return View(new ResponseModel<List<TestModel1VM>> { ProcessStatus = false, Message = saveResult.Message });
 
-            return View(result);
+            var tempList = saveResult.Result.Single().ToObjectList<TestModel1VM>();
+
+            return View(new ResponseModel<List<TestModel1VM>> { ProcessStatus = true,Result = tempList});
         }
     }
 }
