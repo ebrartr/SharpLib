@@ -86,7 +86,7 @@ namespace SharpLib.Model.Upload
         private string _DestinationPath { get; set; }
 
         /// <summary>
-        /// path where the posted file will be stored,if not set , files will save under C:\SharpLib\UploadedFiles
+        /// path where the posted file will be store,if not set , files will save under C:\SharpLib\UploadedFiles by default
         /// </summary>
         public string DestinationPath
         {

@@ -24,7 +24,7 @@ namespace SharpLib.Extensions.Converter
         /// <typeparam name="T"></typeparam>
         /// <param name="file"></param>
         /// <returns></returns>
-        public static List<T> ToObjectList<T>(this ServerFileVM file)
+        private static List<T> ToObjectList<T>(this ServerFileVM file)
         {
             var objList = new List<T>();
             T obj = default(T);
@@ -108,7 +108,11 @@ namespace SharpLib.Extensions.Converter
         }
 
         /// <summary>
-        /// 
+        /// Allow only excell files and max 1 file can be upload. (your choice of file type and maximum number of files will be ignored)
+        /// <para>Converts excell file to list of T generic Type. It matches columns with property names or DisplayName attribute of property.</para>
+        /// <para>Warning ! Only string or int properties converts to real type. If property is not string or int, it converts it to string by default.</para>
+        /// <para>The conversion to string process controls CustomStringFormat atttribute for string property and converts excell value to string with this attribute info.</para>
+        /// <para>You can convert this default value to datetime or etc. in your custom codes.</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="formfileCollection"></param>
