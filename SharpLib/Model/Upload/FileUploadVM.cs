@@ -83,10 +83,16 @@ namespace SharpLib.Model.Upload
         /// </summary>
         public string FileNamePrefix { get; set; }
 
+        private string _DestinationPath { get; set; }
+
         /// <summary>
-        /// path where the posted file will be stored
+        /// path where the posted file will be stored,if not set , files will save under C:\SharpLib\UploadedFiles
         /// </summary>
-        public string DestinationPath { get; set; }
+        public string DestinationPath
+        {
+            get { return string.IsNullOrWhiteSpace(_DestinationPath) ? @"C:\SharpLib\UploadedFiles" : _DestinationPath; }
+            set { _DestinationPath = value; }
+        }
 
         private int _MaxFileCount { get; set; }
 
@@ -108,14 +114,6 @@ namespace SharpLib.Model.Upload
         {
             get { return string.IsNullOrWhiteSpace(_MaxFileCountOverflowMessage) ? $"Up to {MaxFileCount} files can be selected !" : _MaxFileCountOverflowMessage; }
             set { _MaxFileCountOverflowMessage = value; }
-        }
-
-
-        private string _DestinationNotSetMessage { get; set; }
-        public string DestinationNotSetMessage
-        {
-            get { return string.IsNullOrWhiteSpace(_DestinationNotSetMessage) ? "No Destination path is set." : _DestinationNotSetMessage; }
-            set { DestinationNotSetMessage = value; }
         }
 
         private string _FileDidNotSaveMessage { get; set; }

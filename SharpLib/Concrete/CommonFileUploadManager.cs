@@ -107,13 +107,6 @@ namespace SharpLib.Concrete
 
             var result = new FileSaveResultVM { SavedFileList = new List<ServerFileVM>(), NotSavedFileList = new List<NotSavedFileVM>() };
 
-            if (string.IsNullOrWhiteSpace(init.DestinationPath))
-            {
-                var tempList = validFileList.Select(x => new NotSavedFileVM { FileOriginalName = x.FileName, Message = init.DestinationNotSetMessage });
-
-                return result;
-            }
-
             foreach (var validFile in validFileList)
             {
                 if (!string.IsNullOrEmpty(validFile.FileName))
@@ -167,10 +160,12 @@ namespace SharpLib.Concrete
         /// </summary>
         /// <param name="filePath">directory for file includes file name</param>
         /// <returns></returns>
-        public ResponseModel<string> DeleteFile(string fileDirectory, string customErrorMessage)
+        public static ResponseModel<string> DeleteFile(string fileDirectory, string customErrorMessage)
         {
             try
             {
+                // todo ebrar: write delete codes...
+
                 return null;
             }
             catch (Exception e)

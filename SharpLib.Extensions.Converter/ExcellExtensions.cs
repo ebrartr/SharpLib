@@ -1,4 +1,7 @@
 ﻿using ExcelDataReader;
+using Microsoft.AspNetCore.Http;
+using SharpLib.Concrete;
+using SharpLib.Extensions.File;
 using SharpLib.Extensions.Reflection;
 using SharpLib.Model.Upload;
 using System;
@@ -42,6 +45,9 @@ namespace SharpLib.Extensions.Converter
 
                         break;
                     }
+
+                    if (!columnInfoList.Any(x => !string.IsNullOrWhiteSpace(x.Title)))
+                        throw new Exception("No columns found!");
 
                     while (reader.Read())
                     {
@@ -99,6 +105,41 @@ namespace SharpLib.Extensions.Converter
             }
 
             return objList;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="formfileCollection"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public static List<T> ToObjectList<T>(this IFormFileCollection formfileCollection,ExcellToObjectListInitVM options = null)
+        {
+            if(options == null)
+            {
+                options = new ExcellToObjectListInitVM { DeleteAfterSave = true};
+            }
+
+            if(options.FileUploadOpitons == null)
+                options.FileUploadOpitons = new FileUploadVM();
+
+            options.FileUploadOpitons.AllowedExtensionList = new List<string> { ".xls", ".xlsx" };
+            options.FileUploadOpitons.MaxFileCount = 1;
+
+            var saveResult = formfileCollection.Save(options.FileUploadOpitons);
+
+            if (!saveResult.ProcessStatus)
+                throw new Exception(saveResult.Message);
+
+            var savedFile = saveResult.Result.Single();
+
+            var tempList = savedFile.ToObjectList<T>();
+
+            if(options.DeleteAfterSave)
+                savedFile.Delete();
+
+            return tempList;
         }
         private static void ConvertToString<T>(object excellValue,PropertyInfo prop,T obj,ColumnInfo objPropInExcellColumn,IExcelDataReader reader)
         {

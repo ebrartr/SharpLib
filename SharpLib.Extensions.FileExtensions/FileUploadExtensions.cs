@@ -36,5 +36,19 @@ namespace SharpLib.Extensions.File
 
             return new ResponseModel<List<ServerFileVM>> { ProcessStatus = false, Message = options.FileDidNotSaveMessage };
         }
+
+        public static void Delete(this ServerFileVM serverFilse, FileUploadVM options = null)
+        {
+            try
+            {
+                // todo ebrar: write delete codes...
+
+                
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
