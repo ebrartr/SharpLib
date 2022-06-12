@@ -60,12 +60,6 @@ namespace SharpLib.Concrete
             if (postedFile == null)
                 return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.NoFileSelectedMessage };
 
-            if (postedFile.Length == 0)
-                return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.EmtyContentMessage };
-
-            if (postedFile.Length > init.MaxFileSize)
-                return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.FileSizeOverflowMesaage };
-
             init.AllowedExtensionList = init.AllowedExtensionList.IfNullSetEmpty();
 
             if (init.AllowedExtensionList.Any())
@@ -77,6 +71,12 @@ namespace SharpLib.Concrete
                 if (!init.AllowedExtensionList.Any(x => x == fileExtension))
                     return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.InvalidExtensionMessage };
             }
+
+            if (postedFile.Length == 0)
+                return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.EmtyContentMessage };
+
+            if (postedFile.Length > init.MaxFileSize)
+                return new ResponseModel<ValidFileVM> { ProcessStatus = false, Message = init.FileSizeOverflowMesaage };
 
             byte[] tempBuffer = new byte[postedFile.Length];
             postedFile.OpenReadStream().Read(tempBuffer, 0, tempBuffer.Length);
