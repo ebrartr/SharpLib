@@ -17,9 +17,11 @@ namespace SharpLib.Extensions.Converter
     {
         /// <summary>
         /// Converts excell file to list of T generic Type. It matches columns with property names or DisplayName attribute of property.
-        /// <para>Warning ! Only string or int properties converts to real type. If property is not string or int, it converts it to string by default.</para>
-        /// <para>The conversion to string process controls CustomStringFormat atttribute for string property and converts excell value to string with this attribute info.</para>
+        /// <para>Warning ! Only string or int properties converts with real type. If property is not string or int, it converts it to string by default.</para>
         /// <para>You can convert this default value to datetime or etc. in your custom codes.</para>
+        /// <para>The conversion to string process controls CustomStringFormat atttribute for string property and converts excell value to string with this attribute info.</para>
+        /// <para>CustomStringFormat attribute ise not set, Excell value canverts with default .ToString() method</para>
+        /// <para>Note that : if you did not use custom string format, result of this method may look different from excel. For example : if excell value (1.1.1990) is datetime but you didn't use custom format may be look 1990.1.1 00.00.00 ...</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="file"></param>
@@ -150,7 +152,7 @@ namespace SharpLib.Extensions.Converter
             if (excellValue != null)
             {
 
-                var customFormat = prop.DataFormat();
+                var customFormat = prop.CustomStringFormat();
 
                 if (customFormat == null)
                 {

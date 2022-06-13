@@ -30,7 +30,7 @@ namespace SharpLib.Extensions.Reflection
             return result;
         }
 
-        public static CustomDataFormat DataFormat(this PropertyInfo propInfo)
+        public static CustomDataFormat CustomStringFormat(this PropertyInfo propInfo)
         {
 
             CustomStringFormatAttribute tempAttribute = propInfo.GetCustomAttributes(typeof(CustomStringFormatAttribute), true).Cast<CustomStringFormatAttribute>().SingleOrDefault();
