@@ -18,16 +18,7 @@ namespace SharpLib.Extensions.Reflection
         /// <returns></returns>
         public static string DisplayName(this PropertyInfo propInfo)
         {
-            string result = null;
-
-            DisplayNameAttribute tempAttribute = propInfo.GetCustomAttributes(typeof(DisplayNameAttribute), true).Cast<DisplayNameAttribute>().SingleOrDefault();
-
-            if (tempAttribute != null)
-            {
-                result = tempAttribute.DisplayName;
-            }
-
-            return result;
+            return GetMemeberInfoDisplayName(propInfo);
         }
 
         public static CustomDataFormat CustomStringFormat(this PropertyInfo propInfo)
@@ -47,6 +38,25 @@ namespace SharpLib.Extensions.Reflection
 
             //    return new CustomDataFormat { CultureInfo = customAttr.CultureInfo, Format = customAttr.Format };
             //}
+
+            return null;
+        }
+
+        public static string DisplayName<T>(this T tempClass, string propertyName)
+        {
+            MemberInfo property = typeof(T).GetProperty(propertyName);
+
+            return GetMemeberInfoDisplayName(property);
+        }
+
+        private static string GetMemeberInfoDisplayName(MemberInfo memberInfo)
+        {
+            DisplayNameAttribute tempAttribute = memberInfo.GetCustomAttribute(typeof(DisplayNameAttribute)) as DisplayNameAttribute;
+
+            if (tempAttribute != null)
+            {
+                return tempAttribute.DisplayName;
+            }
 
             return null;
         }
